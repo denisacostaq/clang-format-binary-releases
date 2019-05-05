@@ -1,0 +1,31 @@
+language: cpp
+matrix:
+  include:
+    -os: linux
+before_install:
+  - sudo apt-get update -y
+  - sudo apt-get install clang ninja-build -y
+script:
+  - wget -c --progress=bar https://github.com/llvm/llvm-project/archive/llvmorg-7.1.0.tar.gz
+  - tar -xf llvmorg-7.1.0.tar.gz
+  - mkdir build
+  - pushd build
+  - cmake ../llvm-project-llvmorg-7.1.0/llvm -G "Ninja" -DLLVM_ENABLE_PROJECTS=clang -DCMAKE_BUILD_TYPE="Release"
+  - ninja clang-format
+  - popd
+notifications:
+  email:
+    - denisacostaq@gmail.com
+before_deploy:
+  - cp -r ./build/bin/clang-format clang-format-$(uname -s)-$(dpkg --print-architecture)
+deploy:
+  provider: releases
+  api_key:
+    secure: T+/JHMkMibjgfcgjUbXVuoDiFtHYlABfyiXOybGcb744/NXrjo3G/C8QZl0ESdNBNSlt9XIF03eOn9ukUVUalH+LIJVDhOQIk04UTl/ZEX0iI5RH1Rvw4sfghgT6G3nIKmRJyeUkrF3B53WYkk+neoprK/9nhMbDGA3vfT8/XRW/FXO8/pInfzQOUrt24s0S+TMn/aJ1RVmWHwmdgCOYIghZ0TJemQz8CIqeKrnAC9eWOCqGm1YPf36ftpVjJ6qEFXNustl6fPyhH87j1nRzub5HvNx7AhqAYrRL0Ub6xfORuMaYDJ8tC6g69KcF7yRr7h7qgNtGUEqxZrPWIMUxTi+S57DbqVLLn6qyDD604/BHIu8x5rxbY0t0Jq1i7qgS1iVgiXv9F2wEEregmyxB2h5ESrF1dOf5hhbR91GLRtAHUlIm0qDCvxQXRbn53JfgbNhc3IYeWtBV0GjotQ4tMY6JwF2VJ8ubA4kdBCw51vCqrN80J1zfYQrsiLzB99HnzcbNSuZh+ydtmTFW5v+A+agCgBWZmthATGuCv09zhtlfdC6CK9DhRfADmsIleBo3voOPZ/m7QTJlADfFDx7nip6o+/gHZnfPTt9bPcoVwJbw9VJ2kfMnfU827ZQ6AfdkH09FLSof4hac7OjmsBgepkhgtSTMfxvDt4U8TIhwerI=
+  file:
+   - clang-format-$(uname -s)-$(dpkg --print-architecture)
+  skip_cleanup: true
+  draft: true
+  on:
+    repo: clang-format-binary-releases
+    tags: true
