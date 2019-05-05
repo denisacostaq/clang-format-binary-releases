@@ -29,13 +29,13 @@ notifications:
   email:
     - denisacostaq@gmail.com
 before_deploy:
-  - cp -p ./build/bin/clang-format clang-format-$(uname -s)-$(dpkg --print-architecture)
+  - cp -p ./build/bin/clang-format clang-format-$(uname -s)
 deploy:
   provider: releases
   api_key:
     secure: E49cnvi7g9khUD38EamfX/e9sBe0cM7DPD67/RAvJfhJcvdavT++YZJi9d8h/2Ye8O+9Zc9O/TOxLg40exBizmGa3KbHOP/znCy4nKnSjjHe38ihWWlTOWpe1JAdyskNvShHljwz7W3I2hAOL0fJu29ETZnFHTHJ84CDsY8sypjCifupr8EYxsxKHdwrXWHwvb+9uGPchioedYXoUZjjFj76y6LD4xQw3PFL8MJ2i8z5zPSPwABTncCZwf2uKY+nuP4lgh+gd/dHXFT3yRnfVpyU2MovB/oKbw4U0XNGodZhdcWpdiq5LRiYiICR8xWJuq+dF6FlWpIGTAz2FYBE94RE95JBwg6lnliX+jjzIYg29DdO5mRajAEMofiYqmkr5o7k5Xq0jxeVRqgDmO2B77V5ZK1cdG5MlYuyw8ptLiYsxs0D58o35OKWDOf0qnh1Qyj5k6ly9aoPzuVj9UUonf5zPSGAFIG/LS0xbv3S02IVv7/yDsPIKnL0x4g5YtZ6ylTzfdSZr6QP69cCEt5cxgV7H5JukQ4dZsdqEQA4nXYpw2hhxqPwLqcqgh2c/ierYQ2JMjmKI7/No6n0dIW4+0SWskZL+iQuOMtYpCWuEaJwIECzQtuIYRJTxAqB5pkqlrOXl2wb8S5PJNzaruICKM/yRU1lW6wQVNOX++aAkCQ=
   file:
-   - clang-format-$(uname -s)-$(dpkg --print-architecture)
+   - clang-format-$(uname -s)
   skip_cleanup: true
   draft: true
   on:
