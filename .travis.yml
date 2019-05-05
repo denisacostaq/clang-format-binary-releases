@@ -6,10 +6,17 @@ matrix:
 before_install:
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
       sudo apt-get update -y;
+    fi
+  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+      brew update;
+    fi
+install:
+  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
       sudo apt-get install clang ninja-build -y;
-  elif [[ $TRAVIS_OS_NAME == 'osx' ]]; then
-      brew install clang ninja;
-  fi
+    fi
+  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+      brew install ninja;
+    fi
 script:
   - wget -c --progress=bar https://github.com/llvm/llvm-project/archive/llvmorg-7.1.0.tar.gz
   - tar -xf llvmorg-7.1.0.tar.gz
