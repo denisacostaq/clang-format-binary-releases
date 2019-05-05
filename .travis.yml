@@ -37,7 +37,7 @@ deploy:
   file:
    - clang-format-$(uname -s)
   skip_cleanup: true
-  draft: true
+  draft: false
   on:
     repo: denisacostaq/clang-format-binary-releases
     tags: true
