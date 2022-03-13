@@ -18,11 +18,11 @@ install:
       brew install ninja;
     fi
 script:
-  - wget -c --progress=bar https://github.com/llvm/llvm-project/archive/llvmorg-7.1.0.tar.gz
-  - tar -xf llvmorg-7.1.0.tar.gz
+  - wget -c --progress=bar https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-15-init.tar.gz
+  - tar -xf llvmorg-15-init.tar.gz
   - mkdir build
   - pushd build
-  - cmake ../llvm-project-llvmorg-7.1.0/llvm -G "Ninja" -DLLVM_ENABLE_PROJECTS=clang -DCMAKE_BUILD_TYPE="Release"
+  - cmake ../llvm-project-llvmorg-15-init/llvm -G "Ninja" -DLLVM_ENABLE_PROJECTS=clang -DCMAKE_BUILD_TYPE="Release"
   - ninja clang-format
   - popd
 notifications:
